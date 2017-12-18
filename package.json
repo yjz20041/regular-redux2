@@ -1,0 +1,20 @@
+{
+  "name": "regular-redux2",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yjz20041/regular-redux2.git"
+  },
+  "author": "hzyangjiezheng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yjz20041/regular-redux2/issues"
+  },
+  "homepage": "https://github.com/yjz20041/regular-redux2#readme",
+  "devDependencies": {}
+}
