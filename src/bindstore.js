@@ -1,6 +1,6 @@
 export default {
-    config: function() {
-        var store = this.store || this.data.store || {};
+    config: function(data) {
+        var store = this.store || this.data.store;
         var _self = this;
         if(typeof this.mapStateToData === 'function') {
             _self._mergeStoreToData();
@@ -17,11 +17,11 @@ export default {
             Object.assign(this.data, this.mapDispatchToData(store.dispatch));
         }
 
-        this.supr();
+        this.supr(data);
     },
 
     _mergeStoreToData: function () {
-        var store = this.store || this.data.store || {};
+        var store = this.store || this.data.store;
         var data = this.data;
         var newData = this.mapStateToData(store.getState());
         var _isChange = false;
