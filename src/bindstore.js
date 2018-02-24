@@ -11,7 +11,7 @@ export default {
                 let name = item.name;
                 let unsubscribe = item.unsubscribe || function () {};
                 // HMR
-                if (this.name === name) {
+                if (this.name && this.name === name) {
                     hotReloadingCache.slice(i, 1);
                     unsubscribe();
                 }
@@ -27,7 +27,7 @@ export default {
             // every container instance should has an unique 
             // name, becuase we identify the unsubscribe handler
             // from the container name.
-            if (module.hot && process.env.NODE_ENV === 'development') {
+            if (module.hot && process.env.NODE_ENV === 'development' && this.name) {
                 hotReloadingCache.push({
                     name: this.name,
                     unsubscribe: this.unsubscribe
