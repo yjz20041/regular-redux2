@@ -5,5 +5,5 @@ export default (
 return App.extend(Object.assign({
     mapStateToData,
     mapDispatchToData
-}, extra, bindStore))
+}, {name: App.prototype.name}, extra, bindStore))
 }
