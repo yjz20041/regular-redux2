@@ -127,6 +127,15 @@ export default connect(
 ```
 最终页面会显示hello。
 
+备注：
+
+由于regular没有像react那样有context，所以store无法通过封装provider来传入，需要通过connect的第3个参数或者作为container组件属性传入。
+
+```js
+<Container store={store} />或者connect(, , {store})(Component)
+
+```
+
 
 #
 
