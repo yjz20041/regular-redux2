@@ -28,14 +28,65 @@
 ----components
 
 ----containers
-
+  
+--------index.js
+  
 ----actions
+  
+--------index.js
 
 ----reducers
 
+--------module1.js
+
+--------index.js
+
 ----store.js
 
-#### 第1步 创建store模块 ./store.js
+
+#### 第1步 创建actions模块 ./actions/index.js
+
+```js
+
+export const say = words => dispatch => {
+   dispatch({
+    type: 'SAY',
+    data: words
+   })
+}
+
+```
+
+#### 第2步 创建reducers模块 ./reducers/index.js和module1.js
+
+```js
+// module1.js
+
+export default (state, action) => {
+  state = state || {};
+  switch (action.type) {
+    case 'SAY':
+      return {
+        ...state,
+        words: action.data
+      }
+  }
+}
+
+```
+
+```js
+// index.js
+import {combineReducers} from 'redux';
+import module1 from './module1';
+export default combineReducers({
+  module1
+
+})  
+
+```
+
+#### 第3步 创建store模块 ./store.js
 
 ```js
 import {createStore, applyMiddleware} from 'redux';
@@ -52,7 +103,7 @@ export default createStore(
 
 
 ```
-#### 第2步 创建一个container ./containers/index.js
+#### 第4步 创建一个container ./containers/index.js
 
 ```js
 import store from '../store';
@@ -71,9 +122,10 @@ export default connect(
   config () {
     this.data.actions.say('hello');
   }
-}))
+})).$inject(document.body)
 
 ```
+最终页面会显示hello。
 
 
 #
