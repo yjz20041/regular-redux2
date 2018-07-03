@@ -19,3 +19,66 @@
 
 目前只支持npm： npm install --save regular-redux2
 
+#
+
+### 2步创建一个简单实例
+
+文件结构
+
+----components
+
+----containers
+
+----actions
+
+----reducers
+
+----store.js
+
+#### 第1步 创建store模块 ./store.js
+
+```js
+import {createStore, applyMiddleware} from 'redux';
+import reducers from '../reducers'
+
+// 各种中间件
+const middlewares = [];
+
+export default createStore(
+  (state = {}, action) => {
+      return reducers(state, action);
+  }, applyMiddleware(...middlewares)
+);
+
+
+```
+#### 第2步 创建一个container ./containers/index.js
+
+```js
+import store from '../store';
+import { bindActionCreators } from 'redux';
+import actions from '../actions';
+import {connect} from 'regular-redux2';
+import Regular from 'regularjs';
+
+export default connect(
+  state => ({words: state.module1.words}),
+  dispatcher => ({actions: bindActionCreators(actions, dispatch)),
+  {store}
+)(Regular.extend({
+  name: 'AppContainer',
+  template: `<div>{words}</div>`
+  config () {
+    this.data.actions.say('hello');
+  }
+}))
+
+```
+
+
+#
+
+### 内部原理
+
+
+
