@@ -182,7 +182,11 @@ regular-redux2的核心方法就是connect，它的作用就是链接redux和reg
 
 1.connect会继承SupComponent，并返回一个name值与SupComponent相同的SubComponent。
 
-2.SubComponent会重载config函数，对
+2.SubComponent会重载config函数，1.注册一个redux监听器，监听redux数据变化；2.执行mapDispatchToData函数，将返回的对象合并到SubComponent的data里。一般返回的对象为{actions: bindActionCreators(actions, dispatch)}，这样就可以通过this.data.actions.xxxEvent的形式向redux发送事件。
+
+3.当redux有数据更新时，SubComponent的监听器开始工作，监听器会执行mapStateToData方法得到从redux映射来的数据，然后与自身data数据进行比较，只有在不完全相同的情况下才执行组件$update操作。
+
+4.当SubComponent被销毁时，移除redux监听器。
 
 
 
