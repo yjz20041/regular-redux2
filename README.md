@@ -7,7 +7,7 @@
 
 
 ### 特点
-1.简单，如果你会用react-redux和react，那么你就会用regular-redux2和regular，并且更简单。
+1.易用，如果你会用react-redux和react，那么你就会用regular-redux2和regular，并且更简单。
 
 2.高效，你无需过多的担心组件更新的效率问题。
 
@@ -21,7 +21,7 @@
 
 #
 
-### 2步创建一个简单实例
+### 4步创建一个简单实例
 
 文件结构
 
@@ -42,6 +42,7 @@
 --------index.js
 
 ----store.js
+----connect.js
 
 
 #### 第1步 创建actions模块 ./actions/index.js
@@ -127,13 +128,47 @@ export default connect(
 ```
 最终页面会显示hello。
 
-备注：
+#### 可选步骤
 
 由于regular没有像react那样有context，所以store无法通过封装provider来传入，需要通过connect的第3个参数或者作为container组件属性传入。
 
 ```js
-<Container store={store} />或者connect(, , {store})(Component)
+<Container store={store} />或者connect(mapStateToData, mapDispatchToData, {store})(Component)
 
+```
+你也可以再次封装connect模块./connect.js来避免重复的引入store和actions
+
+```js
+import store from './store';
+import actions from './actions';
+import { bindActionCreators } from 'redux';
+import {connect} from 'regular-redux2';
+
+export default (
+    mapStateToData,
+    mapDispatchToData,
+    extra) => connect(
+    state => ({
+        ...mapStateToData(state)
+    }), dispatch => ({
+        ...mapDispatchToData(dispatch)),
+        actions: bindActionCreators(actions, dispatch)
+    }), {store, ...extra})
+
+```
+利用封装后的connect方法，例子中的步骤4可以简化为
+```js
+import Regular from 'regularjs';
+import connect from '../connect';
+export default connect(
+  state => ({words: state.module1.words})
+)(Regular.extend({
+  name: 'AppContainer',
+  template: `<div>{words}</div>`
+  config () {
+    this.data.actions.say('hello');
+  }
+})).$inject(document.body)
 ```
 
 
