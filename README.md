@@ -137,7 +137,7 @@ export default connect(
 <Container store={store} />或者connect(mapStateToData, mapDispatchToData, {store})(Component)
 
 ```
-你也可以再次封装connect模块./connect.js来避免重复的引入store和actions
+你也可以封装一个通用的connect模块./connect.js来避免反复的引入store和actions
 
 ```js
 import store from './store';
