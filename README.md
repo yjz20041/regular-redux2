@@ -176,7 +176,13 @@ export default connect(
 
 ### 内部原理
 
-TODO
+regular-redux2的核心方法就是connect，它的作用就是链接redux和regular组件。使regular组件可以向redux发送事件，监听redux的数据变化，并将redux数据映射到regular组件内部data里，从而完成组件更新。connect的工作原理为：
+
+以connect(mapStateToData, mapDispatchToData, {store})(SupComponent)为例：
+
+1.connect会继承SupComponent，并返回一个name值与SupComponent相同的SubComponent。
+
+2.SubComponent会重载config函数，对
 
 
 
