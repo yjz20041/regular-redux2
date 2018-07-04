@@ -92,7 +92,7 @@ export default combineReducers({
 
 ```js
 import {createStore, applyMiddleware} from 'redux';
-import reducers from '../reducers'
+import reducers from './reducers'
 
 // 各种中间件
 const middlewares = [];
