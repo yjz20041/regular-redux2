@@ -92,10 +92,11 @@ export default combineReducers({
 
 ```js
 import {createStore, applyMiddleware} from 'redux';
+import reduxThunk from 'redux-thunk';
 import reducers from './reducers'
 
 // 各种中间件
-const middlewares = [];
+const middlewares = [reduxThunk];
 
 export default createStore(
   (state = {}, action) => {
